@@ -86,7 +86,15 @@ class _TpAppState extends State<TpApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("SQFLITE TP"),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "SQFLITE + HTTP ",
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: FutureBuilder(
@@ -162,7 +170,7 @@ class _TpAppState extends State<TpApp> {
                           )
                         : const Icon(
                             Icons.check,
-                            color: Colors.red,
+                            color: Colors.orange,
                           ),
                     title: Text(e["title"].toString()),
                     trailing: IconButton(
@@ -172,7 +180,10 @@ class _TpAppState extends State<TpApp> {
                                 .delete(e[TacheGlobals.columnId] as int);
                           });
                         },
-                        icon: const Icon(Icons.delete_forever_sharp)),
+                        icon: const Icon(
+                          Icons.cancel,
+                          color: Colors.red,
+                        )),
                   ),
                 );
               }).toList(),
