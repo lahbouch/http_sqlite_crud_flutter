@@ -1,4 +1,4 @@
-![ScreenShot](./pics/Screenshot_1687358790.png =200)
+![ScreenShot](./pics/Screenshot_1687358790.png)
 ![ScreenShot](./pics/Screenshot_1687358794.png)
 ![ScreenShot](./pics/Screenshot_1687367024.png)
 ![ScreenShot](./pics/Screenshot_1687367244.png)
