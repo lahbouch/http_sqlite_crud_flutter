@@ -16,15 +16,14 @@ class Modifier extends StatefulWidget {
 
 class _ModifierState extends State<Modifier> {
   TextEditingController? tvTitleController = TextEditingController();
-  String? tvStatus;
-
-  bool getSelected(String status) {
-    return status == "terminé" ? true : false;
-  }
+  bool? status;
 
   @override
   void initState() {
     tvTitleController!.text = widget.tache[TacheGlobals.columnTitle].toString();
+    status = widget.tache[TacheGlobals.columnStatus].toString() == "terminé"
+        ? true
+        : false;
     super.initState();
   }
 
@@ -50,30 +49,24 @@ class _ModifierState extends State<Modifier> {
                   labelText: "Titre de tache"),
               controller: tvTitleController,
             ),
-            RadioListTile(
-              title: Text("En cours"),
-              value: "en cours",
-              groupValue: tvStatus,
-              selected: getSelected(
-                  widget.tache[TacheGlobals.columnStatus].toString()),
-              onChanged: (value) {
-                setState(() {
-                  tvStatus = value;
-                });
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Text("status", style: TextStyle(fontSize: 18)),
+                  Switch(
+                      activeColor: Colors.green,
+                      value: status as bool,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value;
+                        });
+                      }),
+                ],
+              ),
             ),
-            RadioListTile(
-              title: Text("Terminé"),
-              value: "terminé",
-              groupValue: tvStatus,
-              selected: getSelected(
-                  widget.tache[TacheGlobals.columnStatus].toString()),
-              onChanged: (value) {
-                setState(() {
-                  tvStatus = value;
-                });
-              },
-            ),
+
             // TextField(
             //   controller: ,
             // ),
@@ -84,7 +77,7 @@ class _ModifierState extends State<Modifier> {
                   var tache = Tache(
                       int.parse(widget.tache[TacheGlobals.columnId].toString()),
                       title: tvTitleController!.text,
-                      status: tvStatus.toString());
+                      status: status as bool ? "terminé" : "en cours");
 
                   //ajouter a la base de donner
                   setState(() {
@@ -92,7 +85,7 @@ class _ModifierState extends State<Modifier> {
                   });
 
                   tvTitleController!.clear();
-                  tvStatus = "en cours";
+                  status = false;
 
                   //fermeture de l'activity
                   Navigator.pop(context);

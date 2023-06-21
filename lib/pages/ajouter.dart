@@ -15,7 +15,6 @@ class Ajouter extends StatefulWidget {
 
 class _AjouterState extends State<Ajouter> {
   TextEditingController? tvTitleController = TextEditingController();
-  String? tvStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +38,6 @@ class _AjouterState extends State<Ajouter> {
                   labelText: "Title"),
               controller: tvTitleController,
             ),
-            RadioListTile(
-              title: Text("En cours"),
-              value: "en cours",
-              groupValue: tvStatus,
-              selected: true,
-              onChanged: (value) {
-                setState(() {
-                  tvStatus = value;
-                });
-              },
-            ),
-            RadioListTile(
-              title: Text("Terminé"),
-              value: "terminé",
-              groupValue: tvStatus,
-              selected: false,
-              onChanged: (value) {
-                setState(() {
-                  tvStatus = value;
-                });
-              },
-            ),
             // TextField(
             //   controller: ,
             // ),
@@ -69,8 +46,7 @@ class _AjouterState extends State<Ajouter> {
                 onPressed: () {
                   //creation de tache
                   var tache = Tache(null,
-                      title: tvTitleController!.text,
-                      status: tvStatus.toString());
+                      title: tvTitleController!.text, status: "en cours");
 
                   //ajouter a la base de donner
                   setState(() {
@@ -78,7 +54,6 @@ class _AjouterState extends State<Ajouter> {
                   });
 
                   tvTitleController!.clear();
-                  tvStatus = "en cours";
 
                   //fermeture de l'activity
                   Navigator.pop(context);
