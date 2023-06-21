@@ -28,7 +28,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: TpApp());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData.dark(),
+      theme: ThemeData.light(),
+      themeMode: ThemeMode.dark,
+      home: TpApp(),
+    );
   }
 }
 
@@ -151,11 +157,11 @@ class _TpAppState extends State<TpApp> {
                     },
                     leading: e["status"] == "terminé"
                         ? const Icon(
-                            Icons.notifications_active,
+                            Icons.done_all,
                             color: Colors.green,
                           )
                         : const Icon(
-                            Icons.notifications_active,
+                            Icons.check,
                             color: Colors.red,
                           ),
                     title: Text(e["title"].toString()),
@@ -166,7 +172,7 @@ class _TpAppState extends State<TpApp> {
                                 .delete(e[TacheGlobals.columnId] as int);
                           });
                         },
-                        icon: const Icon(Icons.delete)),
+                        icon: const Icon(Icons.delete_forever_sharp)),
                   ),
                 );
               }).toList(),

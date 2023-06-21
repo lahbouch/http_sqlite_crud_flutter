@@ -15,12 +15,17 @@ class Modifier extends StatefulWidget {
 }
 
 class _ModifierState extends State<Modifier> {
-  TextEditingController? tvTitleController = TextEditingController(
-      text: widget.tache[TacheGlobals.columnTitle].toString());
+  TextEditingController? tvTitleController = TextEditingController();
   String? tvStatus;
 
   bool getSelected(String status) {
     return status == "terminé" ? true : false;
+  }
+
+  @override
+  void initState() {
+    tvTitleController!.text = widget.tache[TacheGlobals.columnTitle].toString();
+    super.initState();
   }
 
   @override
