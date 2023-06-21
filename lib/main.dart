@@ -142,11 +142,12 @@ class _TpAppState extends State<TpApp> {
               children: snapshot.data!.reversed.map((e) {
                 return Card(
                   child: ListTile(
-                    onTap: () {
-                      Navigator.push(
+                    onTap: () async {
+                      await Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => Details.data(tache: e)));
+                      setState(() {});
                     },
                     leading: e["status"] == "terminé"
                         ? const Icon(

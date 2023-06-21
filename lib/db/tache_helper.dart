@@ -60,4 +60,12 @@ class TacheHelper {
     return await db!.delete(TacheGlobals.table,
         where: "${TacheGlobals.columnId} = ?", whereArgs: [id]);
   }
+
+  Future<int> update(Tache tache) async {
+    Database? db = await getDatabase();
+
+    return await db!.rawUpdate(
+        "UPDATE ${TacheGlobals.table} SET ${TacheGlobals.columnStatus} = ?, ${TacheGlobals.columnTitle} = ? WHERE ${TacheGlobals.columnId} = ?",
+        [tache.status, tache.title, tache.id]);
+  }
 }

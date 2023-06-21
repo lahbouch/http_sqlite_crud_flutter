@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tp/pages/edit.dart';
 import '../globals/tache_globals.dart';
 
 class Details extends StatelessWidget {
@@ -13,6 +14,19 @@ class Details extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Details"),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Modifier.data(tache: tache)),
+                );
+
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.edit))
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
@@ -28,9 +42,15 @@ class Details extends StatelessWidget {
             ),
             ListTile(
               leading: tache[TacheGlobals.columnStatus] == "terminé"
-                  ? Icon(Icons.done)
-                  : Icon(Icons.timelapse),
-              title: Text(tache[TacheGlobals.columnTitle].toString()),
+                  ? Icon(
+                      Icons.done,
+                      color: Colors.green,
+                    )
+                  : Icon(
+                      Icons.timelapse_outlined,
+                      color: Colors.red,
+                    ),
+              title: Text(tache[TacheGlobals.columnStatus].toString()),
             ),
           ],
         ),
